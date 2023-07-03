@@ -36,10 +36,12 @@ npm start
 
 After the UI is rendered on the browser, three wallets with a balance of tokens will be avaliable for you. In order to send transactions first you need to connect to a wallet by clicking it:
 
-<figure align="center">
+<div align="center">
+<figure >
   <img src="./images/Captura.PNG" alt="wallets" style="width:50%" >
   <figcaption>Figure. 1 - Connected wallet.</figcaption>
 </figure>
+</div>
 
 If you want a new set of wallet just reload the page.
 
