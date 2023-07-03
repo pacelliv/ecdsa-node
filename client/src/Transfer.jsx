@@ -25,10 +25,13 @@ function Transfer({ connected, setProfiles, profiles }) {
         connected
       );
 
-      signature.addRecoveryBit();
+      signature.addRecoveryBit(); // the signature's recovery bit is not included by default, this method will get it
 
       tx.profiles = profiles;
       tx.hashMsg = hashMsg;
+
+      // Due to the type of the signature, we need to transform the signature outputs to string
+      // and then the server can reconstruct the signature.
       tx.signature = {
         r: signature.r.toString(),
         s: signature.s.toString(),
