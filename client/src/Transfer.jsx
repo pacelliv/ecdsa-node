@@ -1,9 +1,11 @@
 import { useState } from "react";
 import server from "./server";
+import { getHashedMsgAndSignature } from "../lib/sign";
 
-function Transfer({ address, setBalance }) {
+function Transfer({ connected, setProfiles, profiles }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [sender, setSender] = useState("");
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
 
@@ -11,14 +13,32 @@ function Transfer({ address, setBalance }) {
     evt.preventDefault();
 
     try {
-      const {
-        data: { balance },
-      } = await server.post(`send`, {
-        sender: address,
+      let tx = {
+        sender: sender.startsWith("0x") ? sender.slice(2) : sender,
+        recipient: recipient.startsWith("0x") ? recipient.slice(2) : recipient,
         amount: parseInt(sendAmount),
-        recipient,
-      });
-      setBalance(balance);
+      };
+
+      const { hashMsg, signature } = getHashedMsgAndSignature(
+        tx,
+        profiles,
+        connected
+      );
+
+      signature.addRecoveryBit();
+
+      tx.profiles = profiles;
+      tx.hashMsg = hashMsg;
+      tx.signature = {
+        r: signature.r.toString(),
+        s: signature.s.toString(),
+        recovery: signature.recovery.toString(),
+      };
+
+      const {
+        data: { updatedProfiles },
+      } = await server.post("/send", tx);
+      setProfiles(updatedProfiles);
     } catch (ex) {
       alert(ex.response.data.message);
     }
@@ -26,7 +46,27 @@ function Transfer({ address, setBalance }) {
 
   return (
     <form className="container transfer" onSubmit={transfer}>
-      <h1>Send Transaction</h1>
+      <h2>Send Transaction</h2>
+
+      <label>
+        Sender
+        <input
+          placeholder="Type an address, for example: 0x91fd84a3e0..."
+          value={sender}
+          onChange={setValue(setSender)}
+          required
+        ></input>
+      </label>
+
+      <label>
+        Recipient
+        <input
+          placeholder="Type an address, for example: 0x91fd84a3e0..."
+          value={recipient}
+          onChange={setValue(setRecipient)}
+          required
+        ></input>
+      </label>
 
       <label>
         Send Amount
@@ -34,19 +74,16 @@ function Transfer({ address, setBalance }) {
           placeholder="1, 2, 3..."
           value={sendAmount}
           onChange={setValue(setSendAmount)}
+          required
         ></input>
       </label>
 
-      <label>
-        Recipient
-        <input
-          placeholder="Type an address, for example: 0x2"
-          value={recipient}
-          onChange={setValue(setRecipient)}
-        ></input>
-      </label>
-
-      <input type="submit" className="button" value="Transfer" />
+      <input
+        type="submit"
+        className="button"
+        value="Transfer"
+        disabled={!connected}
+      />
     </form>
   );
 }

@@ -9,14 +9,23 @@ label {
   display: flex;
   flex-direction: column;
   letter-spacing: 0.05rem;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: 400;
   color: #222;
 }
 
+li {
+  margin: 0.5rem 0;
+  font-size: 1.05rem;
+}
+
 .app {
-  display: flex;
   max-width: 1400px;
+  margin: 0 auto;
+}
+
+.bottom-app {
+  display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin: 0 auto;
@@ -40,7 +49,39 @@ label {
   }
 }
 
+.container-top {
+  margin-bottom: 12px;
+}
+
+.container-addresses {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.container-address,
+.container-balance {
+  display: flex;
+  flex: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0.8em 1em;
+  cursor: pointer;
+  max-width: 410px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.container-address:hover {
+  background-color: #e9dcfa;
+}
+
+.connected {
+  background-color: #e9dcfa;
+}
+
 input {
+  margin-top: 2px;
   padding: 10px 0;
   border-radius: 0.125rem;
   border: 1px solid rgb(226, 232, 240);
@@ -58,9 +99,13 @@ input {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 400;
-  font-size: .9em;
+  font-size: 0.9em;
   &:hover {
     cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 }
 
@@ -72,7 +117,7 @@ input {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 400;
-    font-size: .9em;
+    font-size: 0.9em;
     display: inline-flex;
     margin-top: 10px;
     padding: 0.75rem;
@@ -83,4 +128,18 @@ input {
 .transfer {
   display: flex;
   flex-direction: column;
+}
+
+.icon {
+  font-size: 20px;
+  pointer-events: none;
+  color: #131313;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }

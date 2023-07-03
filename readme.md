@@ -1,31 +1,70 @@
-## ECDSA Node
+## Week 1 project - ECDSA Node
 
-This project is an example of using a client and server to facilitate transfers between different addresses. Since there is just a single server on the back-end handling transfers, this is clearly very centralized. We won't worry about distributed consensus for this project.
+## Quick start
 
-However, something that we would like to incoporate is Public Key Cryptography. By using Elliptic Curve Digital Signatures we can make it so the server only allows transfers that have been signed for by the person who owns the associated address.
+Clone the repo and cd into the folder:
 
-### Video instructions
-For an overview of this project as well as getting started instructions, check out the following video:
+```bash
+git clone
 
-https://www.loom.com/share/0d3c74890b8e44a5918c4cacb3f646c4
- 
-### Client
+cd folder_name
+```
 
-The client folder contains a [react app](https://reactjs.org/) using [vite](https://vitejs.dev/). To get started, follow these steps:
+To install the dependencies, split your terminal and then run the following commands:
 
-1. Open up a terminal in the `/client` folder
-2. Run `npm install` to install all the depedencies
-3. Run `npm run dev` to start the application 
-4. Now you should be able to visit the app at http://127.0.0.1:5173/
+```bash
+# In one terminal run:
+cd client
+npm install
 
-### Server
+# In the other one:
+cd server
+npm install
+```
 
-The server folder contains a node.js server using [express](https://expressjs.com/). To run the server, follow these steps:
+Start server and client:
 
-1. Open a terminal within the `/server` folder 
-2. Run `npm install` to install all the depedencies 
-3. Run `node index` to start the server 
+```bash
+# On the client terminal run:
+npm run dev
 
-The application should connect to the default server port (3042) automatically! 
+# On the server terminal run:
+npm start
+```
 
-_Hint_ - Use [nodemon](https://www.npmjs.com/package/nodemon) instead of `node` to automatically restart the server on any changes.
+## Using the application
+
+After the UI is rendered on the browser, three wallets with a balance of tokens will be avaliable for you. In order to send transactions first you need to connect to a wallet by clicking it:
+
+<figure align="center">
+  <img src="./images/Captura.PNG" alt="wallets" style="width:50%" >
+  <figcaption>Figure. 1 - Connected wallet.</figcaption>
+</figure>
+
+If you want a new set of wallet just reload the page.
+
+### Client overview
+
+The client has the following responsabilities:
+
+- Render an UI on the brower.
+- Creating a hash message and a Signature using the connected wallet's private key.
+- Creating the transaction to send to the server.
+
+### Server overview
+
+The server has the following responsabilities:
+
+- Creating the wallets and sending them to the client.
+- After a request from the client to execute a transaction, the server will cryptographically prove if the sender of the transaction is in fact the signer by retrieving the public key using the signature and the message.
+- If the sender owns the private will update the balances of the sender and recipient.
+
+## Conclusion
+
+Users will use their private keys to signed a transactions to create a message and a signature. After sending the transaction a Ethereum node will cryptographically verify if the sender of the transaction controls the private key by deriving the public from the signature and the message.
+
+If the retrieved address is equal to the sender then it's proved only the sender could've sent that transaction, otherwise the transaction will be reverted.
+
+## Acknowledgements
+
+Thanks to the [Alchemy University](https://www.alchemy.com/dapps/alchemy-university) team for making the Ethereum Bootcamp accessible to anyone who want to become a web3 engineer.
