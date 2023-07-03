@@ -34,7 +34,7 @@ npm start
 
 ## Using the application
 
-After the UI is rendered on the browser, three wallets with a balance of tokens will be avaliable for you. In order to send transactions first you need to connect to a wallet by clicking it:
+After the UI is rendered on the browser, three wallets with a balance of tokens will be avaliable for you. In order to send transactions first you need to connect to a wallet by clicking on it:
 
 <div align="center">
   <figure >
@@ -44,6 +44,10 @@ After the UI is rendered on the browser, three wallets with a balance of tokens 
     <figcaption>Figure. 1 - Connected wallet.</figcaption>
   </div>
 </div>
+
+<br/>
+
+As shown in the image a connected account will have a soft purple background color.
 
 If you want a new set of wallet just reload the page.
 
