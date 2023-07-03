@@ -5,9 +5,8 @@
 Clone the repo and cd into the folder:
 
 ```bash
-git clone
-
-cd folder_name
+git clone https://github.com/pacelliv/ecdsa-node.git
+cd ecdsa-node
 ```
 
 To install the dependencies, split your terminal and then run the following commands:
