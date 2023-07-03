@@ -1,6 +1,6 @@
-## Week 1 project - ECDSA Node
+## Week 1 project - ECDSA Node 🌌
 
-## Quick start
+## Quick start 🏃‍♀️🏃
 
 Clone the repo and cd into the folder:
 
@@ -32,7 +32,7 @@ npm run dev
 npm start
 ```
 
-## Using the application
+## Using the application 👩‍💻👨‍💻
 
 After the UI is rendered on the browser, three wallets with a balance of tokens will be avaliable for you. In order to send transactions first you need to connect to a wallet by clicking on it:
 
@@ -51,7 +51,7 @@ As shown in the image a connected account will have a soft purple background col
 
 If you want a new set of wallet just reload the page.
 
-### Client overview
+#### Client overview 🔎
 
 The client has the following responsabilities:
 
@@ -59,7 +59,7 @@ The client has the following responsabilities:
 - Creating a hash message and a Signature using the connected wallet's private key.
 - Creating the transaction to send to the server.
 
-### Server overview
+#### Server overview 🔍
 
 The server has the following responsabilities:
 
@@ -67,12 +67,12 @@ The server has the following responsabilities:
 - After a request from the client to execute a transaction, the server will cryptographically prove if the sender of the transaction is in fact the signer by retrieving the public key using the signature and the message.
 - If the sender owns the private will update the balances of the sender and recipient.
 
-## Conclusion
+## Conclusion 👀
 
 Users will use their private keys to signed a transactions to create a message and a signature. After sending the transaction a Ethereum node will cryptographically verify if the sender of the transaction controls the private key by deriving the public from the signature and the message.
 
 If the retrieved address is equal to the sender then it's proved only the sender could've sent that transaction, otherwise the transaction will be reverted.
 
-## Acknowledgements
+## Acknowledgements 🎉🎉
 
 Thanks to the [Alchemy University](https://www.alchemy.com/dapps/alchemy-university) team for making the Ethereum Bootcamp accessible to anyone who want to become a web3 engineer.
